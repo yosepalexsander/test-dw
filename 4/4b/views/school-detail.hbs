@@ -1,0 +1,21 @@
+<div class="container my-5">
+  {{#if result}}
+  {{#each result}}
+  <div class="row g-3">
+    <div class="col-sm-12 col-md-6">
+      <img src={{logo_school}} alt="school_logo">
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <h2 class="school-name text-center">{{name_school}}</h2>
+      <ul class="list-group ">
+        <li class="list-group-item">Alamat: {{address}}</li>
+        <li class="list-group-item">Tingkat: {{school_level}}</li>
+        <li class="list-group-item">Status: {{status_school}}</li>
+        <li class="list-group-item">Diposting oleh: <a href="/user/{{user_id}}" class="stretched-link">{{user_name}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  {{/each}}
+  {{/if}}
+</div>
