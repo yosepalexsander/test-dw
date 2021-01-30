@@ -9,4 +9,4 @@ function cetakPola(n) {
 
 }
 
-cetakPola(n);
+cetakPola(5);
