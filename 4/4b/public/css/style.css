@@ -1,4 +1,15 @@
- img { 
+body {
+  padding-top: 105px;
+}
+
+img { 
    width: 100%;
    object-fit: cover;
- }
+}
+
+#loginForm,
+#registerForm {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}

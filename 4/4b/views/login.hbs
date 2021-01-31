@@ -1,18 +1,22 @@
-<form action="/auth" method="post" style="margin-top: 2em;">
-  <h2 class="mb-3 text-center">
-    Login
-  </h2>
-  <div class="mb-3">
-    <label for="email" class="form-label">Email address</label>
-    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" required>
-    <div id="emailHelp" class="form-text">Jangan lupa gunakan email yang kamu daftarkan ya!</div>
-  </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input type="password" name="password" class="form-control" id="password" required>
-  </div>
-  <div class="mb-3">
-    <p>Belum punya akun? <a href="/register">Yuk Daftar!</a></p>
-  </div>
-  <button type="submit" class="btn btn-primary">Login</button>
-</form>
+<div id="loginForm" class="container-fluid bg-dark rounded-3 p-4">
+  <form action="/auth" method="post">
+    <h2 class="mb-3 text-center">
+      Login
+    </h2>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+      <div id="emailHelp" class="form-text">Jangan lupa gunakan email yang kamu daftarkan ya!</div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" name="password" class="form-control" id="password" required>
+    </div>
+    <div class="mb-3">
+      <p>Belum punya akun? <a href="/register" class="link-info text-decoration-none">Yuk Daftar!</a></p>
+    </div>
+    <div class="d-grid col-6 mx-auto">
+      <input type="submit" class="btn btn-light">
+    </div>
+  </form>
+</div>

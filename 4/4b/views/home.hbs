@@ -1,14 +1,16 @@
 <div>
   {{#if result}}
-  <div class="row g-3">
+  <div class="row g-5">
     {{#each result}}
-    <div class="col-sm-12 col-lg-6">
-      <div class="card h-100">
-        <img src={{logo_school}} alt="school" class="card-img-top">
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="card text-white bg-dark h-100">
+        <img src="data:image/jpeg;base64,{{logo_school}}" alt="{{name_school}} logo" class="card-img-top">
         <div class="card-body">
           <h5 class="card-title">{{name_school}}</h5>
           <p class="card-text">{{school_level}}</p>
-          <a href="/school/{{id}}" class="btn btn-primary">Detail</a>
+        </div>
+        <div class="card-footer bg-transparent d-md-block">
+          <a href="/school/{{id}}" class="btn btn-warning">Detail</a>
         </div>
       </div>
     </div>
@@ -22,28 +24,29 @@
 </div>
 
 <!-- Modal Add School -->
-<form action="/addSchool" method="post" autocomplete="off">
+<form action="/school/create" method="post">
   <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark">
         <div class="modal-header">
           <h5 class="modal-title" id="addModalLabel">Posting Data Sekolah</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <label for="namaProduk" class="form-label">Nama Sekolah</label>
-          <input class="form-control" id="namaProduk" type="text" name="nama_sekolah" aria-label="nama sekolah">
+          <label for="namaSekolah" class="form-label">Nama Sekolah</label>
+          <input class="form-control" id="namaSekolah" type="text" name="name_school" aria-label="nama sekolah">
           <label for="npsn" class="form-label">NPSN</label>
-          <input class="form-control" id="npsn" type="number" name="npsn" placeholder="nomor pokok sekolah.."></input>
+          <input class="form-control" id="npsn" type="number" name="npsn"></input>
           <label for="alamatSekolah" class="form-label">Alamat</label>
-          <input class="form-control" id="alamatSekolah" type="text" name="alamat" aria-label="alamat sekolah">
-          <label for="logoSekolah" class="form-label">Logo atau Foto Sekolah (urlnya saja)</label>
-          <input class="form-control" id="logoSekolah" type="text" name="logo" aria-label="logo sekolah">
+          <input class="form-control" id="alamatSekolah" type="text" name="address" aria-label="alamat sekolah">
+          <label for="logoSekolah" class="form-label">Logo atau Foto Sekolah (link)</label>
+          <input class="form-control" id="logoSekolah" type="text" name="logo_school" aria-label="logo sekolah">
           <label for="tingkatanSekolah" class="form-label">Tingkat Sekolah </label>
-          <input class="form-control" id="tingkatanSekolah" type="text" name="tingkatan" aria-label="tingkatan sekolah">
+          <input class="form-control" id="tingkatanSekolah" type="text" name="school_level"
+            aria-label="tingkatan sekolah">
           <label for="statusSekolah" class="form-label">Status Sekolah (Negeri/Swasta)</label>
-          <input class="form-control" id="statusSekolah" type="text" name="status" aria-label="status sekolah">
-          <input type="hidden" name="" class="id-user" value={{user.id}}>
+          <input class="form-control" id="statusSekolah" type="text" name="status_school" aria-label="status sekolah">
+          <input type="hidden" name="user_id" class="id-user" value="{{user.id}}">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
