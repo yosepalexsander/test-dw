@@ -17,10 +17,23 @@ app.set('view engine', 'hbs'); // set view engine
 app.engine('hbs', exphbs({
   defaultLayout: 'main',
   extname: '.hbs',
+  partialsDir: path.join(__dirname, 'views/partials'),
   helpers: {
     title: function () { return "School Data"; },
     metaContent: function () { return "school database" },
-    metaKeywords: function () { return "sekolah di Indonesia" }
+    metaKeywords: function () { return "sekolah di Indonesia" },
+    when: function (operand1, operator, operand2, opts) {
+      const operators = {
+        'eq': function (l, r) { return l === r; },
+        'neq': function (l, r) { return l !== r; },
+        'gt': function (l, r) { return Number(l) > Number(r); },
+        'or': function (l, r) { return l || r; },
+        'and': function (l, r) { return l && r; },
+        '%': function (l, r) { return (l % r) === 0; }
+      }
+      const result = operators[operator](operand1, operand2);
+      return (result) ? opts.fn(this) : opts.inverse(this);
+    }
   }
 }))
 
@@ -87,7 +100,7 @@ app.post('/auth', (req, res) => {
       req.session.userId = results[0].id;
       req.session.username = results[0].name;
       req.session.email = results[0].email;
-      res.redirect('/');
+      res.redirect(301, '/');
     } else {
       res.send('Incorrect Username and/or Password!');
     }
