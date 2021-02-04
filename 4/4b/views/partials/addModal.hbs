@@ -1,0 +1,33 @@
+<!-- Modal Add School -->
+<form action="/school/create" method="post">
+  <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addModalLabel">Posting Data Sekolah</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label for="namaSekolah" class="form-label">Nama Sekolah</label>
+          <input class="form-control" id="namaSekolah" type="text" name="name_school" aria-label="nama sekolah">
+          <label for="npsn" class="form-label">NPSN</label>
+          <input class="form-control" id="npsn" type="number" name="npsn"></input>
+          <label for="alamatSekolah" class="form-label">Alamat</label>
+          <input class="form-control" id="alamatSekolah" type="text" name="address" aria-label="alamat sekolah">
+          <label for="logoSekolah" class="form-label">Logo atau Foto Sekolah (link)</label>
+          <input class="form-control" id="logoSekolah" type="text" name="logo_school" aria-label="logo sekolah">
+          <label for="tingkatanSekolah" class="form-label">Tingkat Sekolah </label>
+          <input class="form-control" id="tingkatanSekolah" type="text" name="school_level"
+            aria-label="tingkatan sekolah">
+          <label for="statusSekolah" class="form-label">Status Sekolah (Negeri/Swasta)</label>
+          <input class="form-control" id="statusSekolah" type="text" name="status_school" aria-label="status sekolah">
+          <input type="hidden" name="user_id" class="id-user" value="{{user.id}}">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

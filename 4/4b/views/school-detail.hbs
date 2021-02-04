@@ -1,49 +1,126 @@
-<div class="container">
+<div class="card mb-3 rounded-3 bg-dark mw-100 mx-auto">
   {{#if data}}
-  <div class="row bg-dark rounded-3 p-3">
-    <div class="col-sm-12 col-md-6">
-      <img src={{data.logo_school}} alt="school_logo" class="rounded-3">
+  <div id="{{data.id}}" class="row">
+    <div class="col-md-4">
+      <img src={{data.logo_school}} alt="school_logo" class="card-img rounded-3">
     </div>
-    <div class="col-sm-12 col-md-6">
-      <h2 class="school-name mb-4">{{data.name_school}}</h2>
-      <div class="row">
-        <div class="col-4">
-          Alamat:
+    <div class="col-md-8">
+      <div class="card-header">
+        Detail Sekolah
+      </div>
+      <div class="card-body">
+        <h2 class="card-title">{{data.name_school}}</h2>
+        <div class="row">
+          <div class="col-4">
+            NPSN
+          </div>
+          <div class="col-8">
+            {{data.NPSN}}
+          </div>
         </div>
-        <div class="col-8">
-          {{data.address}}
+        <div class="row">
+          <div class="col-4">
+            Alamat
+          </div>
+          <div class="col-8">
+            {{data.address}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            Status
+          </div>
+          <div class="col-8">
+            {{data.status_school}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            Tingkat
+          </div>
+          <div class="col-8">
+            {{data.school_level}}
+          </div>
+        </div>
+        {{#if user.id}}
+        <div class="row">
+          <div class="col-4">
+            Diposting oleh
+          </div>
+          <div class="col-8">
+            <a href="/user/{{data.user_id}}" class="link-info">{{data.user_name}}</a>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-4">
-          Status :
-        </div>
-        <div class="col-8">
-          {{data.status_school}}
-        </div>
+      {{#when data.user_id 'eq' user.id}}
+      <div class="card-footer bg-transparent d-grid gap-2 d-md-flex justify-content-md-end">
+        <button id="deleteButton" class="btn btn-danger delete me-md-2" data-id="{{ data.id }}">Delete</button>
+        <button id="updateButton" class="btn btn-info edit" data-id="{{data.id}}">Edit</button>
       </div>
-      <div class="row">
-        <div class="col-4">
-          Tingkat :
-        </div>
-        <div class="col-8">
-          {{data.school_level}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-4">
-          Diposting oleh :
-        </div>
-        <div class="col-8">
-          <a href="/user/{{data.user_id}}" class="link-info">{{data.user_name}}</a>
-        </div>
-      </div>
-      {{!-- <li class="">Alamat: {{data.address}}</li>
-      <li class="">Tingkat: {{data.school_level}}</li>
-      <li class="">Status: {{data.status_school}}</li>
-      <li class="">Diposting oleh: <a href="/user/{{data.user_id}}" class="stretched-link">{{data.user_name}}</a></li>
-      --}}
+      {{/when}}
     </div>
+    {{/if}}
   </div>
   {{/if}}
 </div>
+
+
+
+{{!-- Update School Modal --}}
+<form id="updateForm">
+  <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalLabel">Update Data Sekolah</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label for="namaSekolah" class="form-label">Nama Sekolah</label>
+          <input class="form-control name_school" id="namaSekolah" type="text" name="name_school"
+            value="{{data.name_school}}" aria-label="nama sekolah">
+          <label for="npsn" class="form-label">NPSN</label>
+          <input class="form-control npsn" id="npsn" type="number" name="npsn" value="{{data.NPSN}}"></input>
+          <label for="alamatSekolah" class="form-label">Alamat</label>
+          <input class="form-control address" id="alamatSekolah" type="text" name="address" aria-label="alamat sekolah"
+            value="{{data.address}}">
+          <label for="logoSekolah" class="form-label">Logo atau Foto Sekolah (link)</label>
+          <input class="form-control logo_school" id="logoSekolah" type="text" name="logo_school"
+            aria-label="logo sekolah" value="{{data.logo_school}}">
+          <label for="tingkatanSekolah" class="form-label">Tingkat Sekolah </label>
+          <input class="form-control school_level" id="tingkatanSekolah" type="text" name="school_level"
+            value="{{data.school_level}}" aria-label="tingkatan sekolah">
+          <label for="statusSekolah" class="form-label">Status Sekolah (Negeri/Swasta)</label>
+          <input class="form-control status_school" id="statusSekolah" type="text" name="status_school"
+            value="{{data.status_school}}" aria-label="status sekolah">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+{{!-- Delete School Modal --}}
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content bg-dark rounded-3 p-4">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete Data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <strong>Apakah anda yakin ingin menghapus data tersebut?</strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button id="deleteSubmit" type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/index.js"></script>
