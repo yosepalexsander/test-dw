@@ -91,6 +91,8 @@ app.use('/user', userRouters);
 // school 
 app.use('/school', schoolRouters);
 
-app.listen(PORT, () => {
+(async function () {
+    await app.listen(PORT)
     console.log('Server is running on port ', PORT);
-});
+})();
+

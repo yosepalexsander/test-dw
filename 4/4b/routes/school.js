@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../helpers/db');
 const router = express.Router();
+const { authenticateToken } = require('../middleware/jwt');
 
 router.post('/', (req, res) => {
     if (!req.session.userId) {
@@ -26,20 +27,21 @@ router.post('/', (req, res) => {
     })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticateToken, (req, res) => {
     const sql = "SELECT school_tb.id, user_tb.id  AS user_id, user_tb.name AS user_name, school_tb.name_school, school_tb.NPSN, school_tb.address, school_tb.logo_school, school_tb.school_level, school_tb.status_school FROM school_tb INNER JOIN user_tb ON user_tb.id = school_tb.user_id AND school_tb.id =" + req.params.id;
     pool.getConnection((err, conn) => {
         if (err) throw err;
         conn.query(sql, (err, result) => {
             if (err) throw err;
-            res.render('school-detail', {
-                data: result[0],
-                user: {
-                    loggedIn: req.session.loggedIn,
-                    id: req.session.userId,
-                    name: req.session.username,
-                },
-            })
+            // res.render('school-detail', {
+            //     data: result[0],
+            //     user: {
+            //         loggedIn: req.session.loggedIn,
+            //         id: req.session.userId,
+            //         name: req.session.username,
+            //     },
+            // })
+            res.json(result[0])
         });
         conn.release();
     });
